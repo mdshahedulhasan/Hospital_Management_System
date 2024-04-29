@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.peytosoft.PatientService.Model.Patient;
 import com.peytosoft.PatientService.Service.PatientService;
 
@@ -38,7 +37,6 @@ public class PatientController {
     public ResponseEntity<String> createPatient(@RequestBody Patient patient){
         return patientService.createPatient(patient);
     }
-	
 	
 
 }

@@ -6,10 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.peytosoft.PatientService.Dao.PatientDao;
+
+
 import com.peytosoft.PatientService.Model.Patient;
 
+@Service
 public class PatientService {
 	
 	@Autowired
@@ -37,5 +41,6 @@ public class PatientService {
 		patientDao.save(patient);
 		return new ResponseEntity<>("Success",HttpStatus.CREATED);
 	}
+
 
 }
