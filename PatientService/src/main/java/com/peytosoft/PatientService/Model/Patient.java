@@ -13,8 +13,7 @@ import jakarta.persistence.Table;
 public class Patient {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer patientId;
+	private Integer id;
 	
 	private String firstName;
 	private String lastName;
@@ -29,10 +28,10 @@ public class Patient {
 	
 	
 	
-	public Patient(Integer patientId, String firstName, String lastName, String address, Integer contactNo1,
+	public Patient(Integer id, String firstName, String lastName, String address, Integer contactNo1,
 			Integer contactNo2, String email) {
 		super();
-		this.patientId = patientId;
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -45,11 +44,11 @@ public class Patient {
 
 
 
-	public Integer getPatientId() {
-		return patientId;
+	public Integer getId() {
+		return id;
 	}
-	public void setPatientId(Integer patientId) {
-		this.patientId = patientId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getFirstName() {
 		return firstName;

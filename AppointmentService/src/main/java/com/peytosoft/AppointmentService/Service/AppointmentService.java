@@ -17,7 +17,7 @@ public class AppointmentService {
 	@Autowired
 	AppointmentDao appointmentDao;
 
-	public ResponseEntity<List<Appointment>> getappointmentBypatientId(Integer patientId) {
+	public ResponseEntity<List<Appointment>> getAppointmentBypatientId(Integer patientId) {
 		try {
             return new ResponseEntity<>(appointmentDao.findByPatientId(patientId), HttpStatus.OK);
         }catch (Exception e){
@@ -31,9 +31,25 @@ public class AppointmentService {
 		return new ResponseEntity<>("Success",HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<List<Appointment>> getappointmentBydoctorId(Integer doctorId) {
+	public ResponseEntity<List<Appointment>> getAppointmentBydoctorId(Integer doctorId) {
 		try {
             return new ResponseEntity<>(appointmentDao.findByDoctorId(doctorId), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+	}
+
+	public ResponseEntity<String> updateStatus(Appointment appointment) {
+		Appointment existingAppointment = appointmentDao.findById(appointment.getAppointmentId() ).orElse(null);
+		existingAppointment.setAppointmentStatus(appointment.getAppointmentStatus());
+		appointmentDao.save(existingAppointment);
+		return new ResponseEntity<>("Success",HttpStatus.CREATED);
+	}
+
+	public ResponseEntity<List<Appointment>> getAllAppointment() {
+		try {
+            return new ResponseEntity<>(appointmentDao.findAll(), HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
         }

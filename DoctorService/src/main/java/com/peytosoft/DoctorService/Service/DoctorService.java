@@ -2,11 +2,13 @@ package com.peytosoft.DoctorService.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 
 import com.peytosoft.DoctorService.Dao.DoctorDao;
 import com.peytosoft.DoctorService.Model.Doctor;
@@ -22,9 +24,9 @@ public class DoctorService {
 		return new ResponseEntity<>("Success",HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<Doctor> getDoctorBydoctorId(Integer doctorId) {
+	public ResponseEntity<Optional<Doctor>> getDoctorBydoctorId(Integer id) {
 		try {
-            return new ResponseEntity<>(doctorDao.findByDoctorId(doctorId), HttpStatus.OK);
+            return new ResponseEntity<>(doctorDao.findById(id), HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -65,6 +67,18 @@ public class DoctorService {
             e.printStackTrace();
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+	}
+
+	public ResponseEntity<String> updateProfile(Doctor doctor) {
+		Doctor existingDoctor = doctorDao.findById(doctor.getId() ).orElse(null);
+		existingDoctor.setFirstName(doctor.getFirstName());
+		existingDoctor.setLastName(doctor.getLastName());
+		existingDoctor.setDepartment(doctor.getDepartment());
+		existingDoctor.setSpeciality(doctor.getSpeciality());
+		existingDoctor.setContactNo(doctor.getContactNo());
+		existingDoctor.setDesignation(doctor.getDesignation());
+		doctorDao.save(existingDoctor);
+		return new ResponseEntity<>("Success",HttpStatus.CREATED);
 	}
 	
 	

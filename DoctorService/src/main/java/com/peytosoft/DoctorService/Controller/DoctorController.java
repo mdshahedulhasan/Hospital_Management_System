@@ -1,15 +1,19 @@
 package com.peytosoft.DoctorService.Controller;
 
 import java.util.List;
+import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.peytosoft.DoctorService.Model.Doctor;
 import com.peytosoft.DoctorService.Service.DoctorService;
@@ -21,6 +25,7 @@ import com.peytosoft.DoctorService.Service.DoctorService;
 @RequestMapping("doctor")
 public class DoctorController {
 	
+	
 	@Autowired
 	DoctorService doctorService;
 	
@@ -31,12 +36,13 @@ public class DoctorController {
 	
 	@GetMapping("allDoctors")
     public ResponseEntity<List<Doctor>> getAllDoctor(){
+
         return doctorService.getAllDoctor();
     }
 	
-	@GetMapping("getDoctorBydoctorId/{doctorId}")
-	public ResponseEntity<Doctor> getDoctorBydoctorId(@PathVariable Integer doctorId){
-	    return doctorService.getDoctorBydoctorId(doctorId);
+	@GetMapping("getDoctorBydoctorId/{id}")
+	public ResponseEntity<Optional<Doctor>> getDoctorBydoctorId(@PathVariable Integer id){
+	    return doctorService.getDoctorBydoctorId(id);
 	}
 	
 	@GetMapping("getDoctorByFirstName/{firstName}")
@@ -53,6 +59,11 @@ public class DoctorController {
 	public ResponseEntity<List<Doctor>> getDoctorByspeciality(@PathVariable String spec){
 	    return doctorService.getDoctorByspeciality(spec);
 	}
+	
+	@PutMapping("updateProfile")
+    public ResponseEntity<String> updateProfile(@RequestBody Doctor doctor){
+        return doctorService.updateProfile(doctor);
+    }
 	
 	
 

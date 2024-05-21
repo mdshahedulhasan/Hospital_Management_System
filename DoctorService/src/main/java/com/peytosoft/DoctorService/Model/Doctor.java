@@ -11,36 +11,35 @@ import jakarta.persistence.Table;
 public class Doctor {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer doctorId;
+	private Integer id;
 	
 	private String firstName;
 	private String lastName;
 	private String department;
 	private String speciality;
 	private String contactNo;
-	private String emailId;
+	private String email;
 	private String designation;
 	
 	public Doctor() {}
 	
-	public Doctor(Integer doctorId, String firstName, String lastName, String department, String speciality,
-			String contactNo, String emailId, String designation) {
+	public Doctor(Integer id, String firstName, String lastName, String department, String speciality,
+			String contactNo, String email, String designation) {
 		super();
-		this.doctorId = doctorId;
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.department = department;
 		this.speciality = speciality;
 		this.contactNo = contactNo;
-		this.emailId = emailId;
+		this.email = email;
 		this.designation = designation;
 	}
-	public Integer getDoctorId() {
-		return doctorId;
+	public Integer getId() {
+		return id;
 	}
-	public void setDoctorId(Integer doctorId) {
-		this.doctorId = doctorId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -72,11 +71,11 @@ public class Doctor {
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
-	public String getEmailId() {
-		return emailId;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getDesignation() {
 		return designation;
